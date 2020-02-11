@@ -90,9 +90,10 @@ impl Render<Msg, ()> for Model {
         dodrio!(bump,
             <div class="card">
                 <div class="card-content">
-                {div(bump)
+                {
+                    div(bump)
                     .attr("data-content", content.into_bump_str())
-                    .attr("class", "content")
+                    .attr("class", "content is-unselectable")
                     .finish()
                 }
                 </div>

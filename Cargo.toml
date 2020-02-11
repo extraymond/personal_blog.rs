@@ -3,14 +3,10 @@ name = "wasm-blog"
 version = "0.1.0"
 authors = ["Raymond Yeh <extraymond@gmail.com>"]
 edition = "2018"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
+desription = "A blog written in rust compile to wasm."
+license = "MIT"
 
 [dependencies]
-# wasm-bindgen = "0.2.58"
-# wasm-bindgen-futures = "0.4.8"
-# futures = "0.3.4"
 js-sys = "0.3.35"
 include_dir = "0.5.0"
 dodrio-ext = { git = "https://github.com/extraymond/dodrio-ext" }
@@ -27,13 +23,6 @@ version = "0.3.35"
 features = [
 "Document",
  "Element",
- "Event",
- "EventTarget",
- "CustomEvent",
- "CustomEventInit",
- "EventInit",
- "UiEvent",
- "UiEventInit",
  "Document",
  "NodeList"
  ]

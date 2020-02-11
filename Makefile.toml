@@ -1,8 +1,17 @@
 [tasks.live-build]
 watch = { ignore_pattern = "public/*"}
 command = "wasm-pack"
-args = ["build", "--debug", "-t", "web", "-d", "public"]
+args = ["build", "--debug", "-t", "web", "-d", "public/pkg"]
 dependeny = ["check"]
+
+[tasks.build-release]
+command = "wasm-pack"
+args = ["build", "-t", "web", "-d", "public/pkg"]
+depedency = ["clean_pkg"]
+
+[tasks.clean_pkg]
+command = "rm"
+args = ["-rf", "public/pkg"]
 
 [tasks.check]
 command = "cargo"
