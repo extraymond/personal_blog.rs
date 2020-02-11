@@ -1,0 +1,16 @@
+{
+  "name": "wasm-blog",
+  "collaborators": [
+    "Raymond Yeh <extraymond@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "license": "MIT",
+  "files": [
+    "wasm_blog_bg.wasm",
+    "wasm_blog.js",
+    "wasm_blog.d.ts"
+  ],
+  "module": "wasm_blog.js",
+  "types": "wasm_blog.d.ts",
+  "sideEffects": false
+}
