@@ -1,6 +1,7 @@
-#![recursion_limit = "256"]
+#![recursion_limit = "1024"]
 
 mod component;
+mod elements;
 use dodrio_ext::prelude::*;
 
 #[wasm_bindgen]

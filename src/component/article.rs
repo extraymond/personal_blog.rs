@@ -1,8 +1,5 @@
 use dodrio_ext::prelude::*;
-use futures::{
-    channel::oneshot,
-    future::{AbortHandle, AbortRegistration, Abortable},
-};
+use futures::channel::oneshot;
 use futures_timer::Delay;
 use gloo::events;
 use pulldown_cmark::{html, Options, Parser};
@@ -13,8 +10,6 @@ pub struct Model(pub String);
 
 pub enum Msg {
     Init(Sender<Msg>),
-    // Creation,
-    // Setup(AbortHandle),
     Clicked,
     ContentChanged(String, web_sys::Element),
 }

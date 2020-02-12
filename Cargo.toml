@@ -17,6 +17,8 @@ console_error_panic_hook = "0.1.6"
 futures-timer = { version = "3.0.1", features = ["wasm-bindgen"]}
 futures = "0.3.4"
 pulldown-cmark = "0.6.1"
+anyhow = "1.0.26"
+thiserror = "1.0.10"
 
 [dependencies.web-sys]
 version = "0.3.35"
@@ -24,7 +26,15 @@ features = [
 "Document",
  "Element",
  "Document",
- "NodeList"
+ "NodeList",
+ "HtmlHeadElement",
+ "HtmlLinkElement",
+ "EventTarget",
+ "CustomEvent",
+ "CustomEventInit",
+ "MouseEvent",
+ "DomRect",
+ "DomRectReadOnly"
  ]
 
 [lib]
