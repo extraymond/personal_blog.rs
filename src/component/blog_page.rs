@@ -34,7 +34,8 @@ impl Component<(), Msg> for Model {
                 for entry in PROJECT_DIR.find(glob).unwrap() {
                     if let DirEntry::File(file) = entry {
                         let md = file.contents_utf8().unwrap();
-                        let article = super::article::Model(md.to_string());
+                        log::info!("{}", md);
+                        let article = super::article::Model(md.to_string(), None);
                         let ent = Entity::new(article, root_tx.clone());
                         self.articles.push(ent);
                     }
