@@ -2,13 +2,25 @@
 
 mod component;
 mod elements;
+use cfg_if::*;
 use dodrio_ext::prelude::*;
+
+cfg_if! {
+    if #[cfg(feature = "wee_alloc")] {
+        #[global_allocator]
+        static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
+    }
+}
 
 #[wasm_bindgen]
 pub fn start() {
+    #[cfg(feature = "console_error_panic_hook")]
     console_error_panic_hook::set_once();
-    femme::start(log::LevelFilter::Debug).unwrap();
-    log::info!("start testing");
+    if cfg!(debug_assertions) {
+        femme::start(log::LevelFilter::Debug).unwrap();
+    } else {
+        femme::start(log::LevelFilter::Warn).unwrap();
+    }
     let mut hub = MessageHub::new();
     hub.bind_root_el(component::blog_page::Model::default(), None);
     hub.mount_hub_rx();
