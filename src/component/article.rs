@@ -1,7 +1,5 @@
 use dodrio_ext::prelude::*;
-use futures::channel::oneshot;
 use futures_timer::Delay;
-use gloo::events;
 use pulldown_cmark::{html, Options, Parser};
 use std::time::Duration;
 

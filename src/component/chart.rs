@@ -14,32 +14,55 @@ pub enum Msg {
     Watcher(Sender<Msg>, [i32; 2]),
 }
 
+pub enum Charts {
+    Simple,
+}
+
 pub fn simple_chart() -> Result<Vegalite, String> {
     let chart = VegaliteBuilder::default()
-    .title("Stock price")
-    .description("Google's stock price over time.")
-    .autosize(AutosizeType::Fit)
-    .data(UrlDataBuilder::default().url(
-        "https://raw.githubusercontent.com/davidB/vega_lite_3.rs/master/examples/res/data/stocks.csv"
-    ).build()?)
-    .transform(vec![
-        TransformBuilder::default().filter("datum.symbol==='GOOG'")
-    .build()?])
-    .mark(Mark::Line)
-    .encoding(
-        EncodingBuilder::default()
-            .x(XClassBuilder::default()
-                .field("date")
-                .def_type(StandardType::Temporal)
-                .build()?)
-            .y(YClassBuilder::default()
-                .field("price")
-                .def_type(StandardType::Quantitative)
-                .build()?)
-            .build()?,
-    )
-    .build()?;
-    // chart.vconcat.replace(specs);
+        .title("Weather")
+        .autosize(AutosizeType::Fit)
+        .data(
+            UrlDataBuilder::default()
+                .url("https://raw.githubusercontent.com/vega/vega-datasets/master/data/weather.csv")
+                .build()?,
+        )
+        // .transform(vec![TransformBuilder::default()
+        //     .filter("datum.symbol==='GOOG'")
+        //     .build()?])
+        .mark(Mark::Circle)
+        .encoding(
+            EncodingBuilder::default()
+                .x(XClassBuilder::default()
+                    .field("date")
+                    .def_type(StandardType::Temporal)
+                    .build()?)
+                .y(YClassBuilder::default()
+                    .field("wind")
+                    .def_type(StandardType::Ordinal)
+                    .build()?)
+                .color(
+                    DefWithConditionMarkPropFieldDefStringNullBuilder::default()
+                        .field("weather")
+                        .def_with_condition_mark_prop_field_def_string_null_type(
+                            StandardType::Nominal,
+                        )
+                        .build()?,
+                )
+                .column(
+                    FacetFieldDefBuilder::default()
+                        .field("location")
+                        .facet_field_def_type(StandardType::Nominal)
+                        .build()?,
+                )
+                // .size(
+                //     DefWithConditionMarkPropFieldDefNumberBuilder::default()
+                //         .field("weather")
+                //         .build()?,
+                // )
+                .build()?,
+        )
+        .build()?;
 
     Ok(chart)
 }
@@ -50,6 +73,8 @@ impl Component<Msg, ()> for Model {
     }
 
     fn mounted(tx_handle: Sender<Msg>, _: Sender<()>, _: Sender<bool>) {
+        log::info!("mounted");
+
         let mut tx = tx_handle.clone();
         spawn_local(async move {
             tx.send(Msg::Init(tx.clone())).await.unwrap();
@@ -63,19 +88,20 @@ impl Component<Msg, ()> for Model {
         let watch_job = async move {
             loop {
                 if let Ok(nodes) = doc.query_selector_all("[data-watchresize=true]") {
-                    Delay::new(Duration::from_micros(200)).await;
-                    let node = nodes.get(0).unwrap();
-                    let node: web_sys::EventTarget = node.unchecked_into();
-                    let el: web_sys::HtmlElement = node.clone().unchecked_into();
-                    let new_dim = [el.client_width(), el.client_height()];
-                    if (dimension != new_dim) && (new_dim[0] != 0 && new_dim[1] != 0) {
-                        dimension = new_dim;
-                        tx.send(Msg::Watcher(tx.clone(), dimension)).await.unwrap();
+                    Delay::new(Duration::from_millis(50)).await;
+                    if let Some(node) = nodes.get(0) {
+                        let node: web_sys::EventTarget = node.unchecked_into();
+                        let el: web_sys::HtmlElement = node.clone().unchecked_into();
+                        let new_dim = [el.client_width(), el.client_height()];
+                        if (dimension != new_dim) && (new_dim[0] != 0 && new_dim[1] != 0) {
+                            dimension = new_dim;
+                            tx.send(Msg::Watcher(tx.clone(), dimension)).await.unwrap();
+                        }
                     }
                 };
             }
         };
-        spawn_local(watch_job);
+        // spawn_local(watch_job);
     }
 
     fn update(&mut self, msg: Msg) -> bool {

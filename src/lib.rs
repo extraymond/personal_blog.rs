@@ -2,6 +2,7 @@
 
 mod component;
 mod elements;
+mod views;
 use cfg_if::*;
 use dodrio_ext::prelude::*;
 use vega_lite_3::*;
