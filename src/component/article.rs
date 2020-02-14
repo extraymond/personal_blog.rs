@@ -62,7 +62,6 @@ impl Component<Msg, ()> for Model {
                 false
             }
             Msg::ContentChanged(content, el) => {
-                dbg!("hey");
                 self.0 = content;
                 let options = Options::empty();
                 let parser = Parser::new_ext(&self.0, options);

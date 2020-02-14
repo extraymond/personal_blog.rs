@@ -6,6 +6,20 @@
     <title>Blog about rust</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@4"></script>
+
+    <script type="text/javascript">
+    window.addEventListener("vega", (e)=>{
+      var spec = JSON.parse(e.detail);
+      vegaEmbed('#vega', spec).then(function(result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+      }).catch(console.error);
+    })
+    </script>
+
     <script type="module">
       import init, {start} from "./wasm_blog.js";
       init().then(()=>{

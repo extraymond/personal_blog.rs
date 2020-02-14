@@ -23,7 +23,6 @@ impl Component<(), Msg> for Model {
     fn mounted(_: Sender<()>, mut ent_tx: Sender<Msg>, root_tx: Sender<bool>) {
         spawn_local(async move {
             ent_tx.send(Msg::AddContent(root_tx)).await.unwrap();
-            log::info!("we need to add some nodes");
         });
     }
 
@@ -34,7 +33,6 @@ impl Component<(), Msg> for Model {
                 for entry in PROJECT_DIR.find(glob).unwrap() {
                     if let DirEntry::File(file) = entry {
                         let md = file.contents_utf8().unwrap();
-                        log::info!("{}", md);
                         let article = super::article::Model(md.to_string(), None);
                         let ent = Entity::new(article, root_tx.clone());
                         self.articles.push(ent);
@@ -60,6 +58,10 @@ impl Render<(), Msg> for Model {
             .iter()
             .map(|content: &ArticleEnt| <_ as dodrio::Render>::render(content, ctx))
             .collect::<Vec<Node<'a>>>();
-        dodrio!(bump, <div class="box">{ view }</div>)
+        dodrio!(bump,
+            <div class="box">
+                { view }
+            </div>
+        )
     }
 }
