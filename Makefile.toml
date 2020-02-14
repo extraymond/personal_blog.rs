@@ -6,7 +6,7 @@ dependeny = ["check"]
 
 [tasks.build-release]
 command = "wasm-pack"
-args = ["build", "-t", "web", "-d", "public"]
+args = ["build", "--release", "-t", "web", "-d", "public"]
 
 [tasks.check]
 command = "cargo"

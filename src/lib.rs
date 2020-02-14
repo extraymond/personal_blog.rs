@@ -13,30 +13,6 @@ cfg_if! {
     }
 }
 
-pub fn show() -> String {
-    let chart = VegaliteBuilder::default()
-    .title("Stock price")
-    .description("Google's stock price over time.")
-    .data(UrlDataBuilder::default().url(
-        "https://raw.githubusercontent.com/davidB/vega_lite_3.rs/master/examples/res/data/stocks.csv"
-    ).build().unwrap())
-    .transform(vec![
-        TransformBuilder::default().filter("datum.symbol==='GOOG'")
-    .build().unwrap()])
-    .mark(Mark::Line)
-    .encoding(EncodingBuilder::default()
-        .x(XClassBuilder::default()
-            .field("date")
-            .def_type(StandardType::Temporal)
-            .build().unwrap())
-        .y(YClassBuilder::default()
-            .field("price")
-            .def_type(StandardType::Quantitative)
-            .build().unwrap()).build().unwrap()).build().unwrap();
-
-    chart.to_string().unwrap()
-}
-
 #[wasm_bindgen]
 pub fn start() {
     #[cfg(feature = "console_error_panic_hook")]
@@ -47,10 +23,8 @@ pub fn start() {
         femme::start(log::LevelFilter::Warn).unwrap();
     }
 
-    show();
-
     let mut hub = MessageHub::new();
-    hub.bind_root_el(component::chart::Model(show()), None);
+    hub.bind_root_el(component::chart::Model::default(), None);
     hub.mount_hub_rx();
 }
 
