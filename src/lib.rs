@@ -5,7 +5,7 @@ mod elements;
 mod views;
 use cfg_if::*;
 use dodrio_ext::prelude::*;
-use vega_lite_3::*;
+mod home;
 
 cfg_if! {
     if #[cfg(feature = "wee_alloc")] {
@@ -18,6 +18,7 @@ cfg_if! {
 pub fn start() {
     #[cfg(feature = "console_error_panic_hook")]
     console_error_panic_hook::set_once();
+
     if cfg!(debug_assertions) {
         femme::start(log::LevelFilter::Debug).unwrap();
     } else {
@@ -25,7 +26,16 @@ pub fn start() {
     }
 
     let mut hub = MessageHub::new();
-    hub.bind_root_el(component::chart::Model::default(), None);
+
+    hub.bind_root_el(
+        component::blog_page::Model::default(),
+        //  {
+        //     tabs: vec![],
+        //     idx: 0,
+        // },
+        None,
+    );
+
     hub.mount_hub_rx();
 }
 

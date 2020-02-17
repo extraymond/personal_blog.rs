@@ -183,6 +183,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "bstr"
+version = "0.2.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "502ae1441a0a5adb8fbd38a5955a6416b9493e92b465de5e4a9bde6a539c2c48"
+dependencies = [
+ "lazy_static",
+ "memchr",
+ "regex-automata",
+ "serde",
+]
+
+[[package]]
 name = "bumpalo"
 version = "2.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -311,6 +323,28 @@ dependencies = [
  "autocfg 0.1.7",
  "cfg-if",
  "lazy_static",
+]
+
+[[package]]
+name = "csv"
+version = "1.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "00affe7f6ab566df61b4be3ce8cf16bc2576bca0963ceb0955e45d514bf9a279"
+dependencies = [
+ "bstr",
+ "csv-core",
+ "itoa",
+ "ryu",
+ "serde",
+]
+
+[[package]]
+name = "csv-core"
+version = "0.1.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ca2be23073829399f39689074cca6997d929a634f73e5d08e24323c30c01832e"
+dependencies = [
+ "memchr",
 ]
 
 [[package]]
@@ -809,6 +843,7 @@ dependencies = [
  "cfg-if",
  "libc",
  "wasi",
+ "wasm-bindgen",
 ]
 
 [[package]]
@@ -1204,6 +1239,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2839e79665f131bdb5782e51f2c6c9599c133c6098982a54c794358bf432529c"
 
 [[package]]
+name = "opener"
+version = "0.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "13117407ca9d0caf3a0e74f97b490a7e64c0ae3aa90a8b7085544d0c37b6f3ae"
+dependencies = [
+ "winapi",
+]
+
+[[package]]
 name = "openssl-probe"
 version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1521,6 +1565,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "regex-automata"
+version = "0.1.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "92b73c2a1770c255c240eaa4ee600df1704a38dc3feaa6e949e7fcd4f8dc09f9"
+dependencies = [
+ "byteorder",
+]
+
+[[package]]
 name = "regex-syntax"
 version = "0.6.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1631,6 +1684,17 @@ dependencies = [
  "digest",
  "fake-simd",
  "opaque-debug",
+]
+
+[[package]]
+name = "showata"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f7df3ded8a3a149e5ffce5ebb91a2d77ba661647d954726f9d2a3366b10eedc9"
+dependencies = [
+ "anyhow",
+ "base64",
+ "opener",
 ]
 
 [[package]]
@@ -1966,11 +2030,14 @@ version = "0.2.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e470485f3e23e40c2e609497ce26f946b73b01bfd7451827484801278e7cfff8"
 dependencies = [
+ "anyhow",
+ "csv",
  "derive_builder",
  "derive_more",
  "ndarray",
  "serde",
  "serde_json",
+ "showata",
 ]
 
 [[package]]
@@ -2126,11 +2193,14 @@ dependencies = [
  "femme",
  "futures 0.3.4",
  "futures-timer",
+ "getrandom",
  "gloo",
  "include_dir",
  "js-sys",
  "log",
+ "ndarray",
  "pulldown-cmark",
+ "showata",
  "thiserror",
  "vega_lite_3",
  "wasm-bindgen-test",

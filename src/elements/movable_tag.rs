@@ -1,9 +1,5 @@
-use anyhow::Result;
 use dodrio_ext::prelude::*;
-use futures::{
-    channel::oneshot,
-    future::{AbortHandle, AbortRegistration, Abortable},
-};
+use futures::future::{AbortHandle, AbortRegistration, Abortable};
 use thiserror::Error;
 
 use futures_timer::Delay;

@@ -24,7 +24,10 @@ anyhow = "1.0.26"
 thiserror = "1.0.10"
 wee_alloc = { version = "0.4.5", optional = true }
 cfg-if = "0.1.10"
-vega_lite_3 = { version = "0.2.4", features = ["ndarray"], default-features = false }
+vega_lite_3 = { vesion = "0.2.4" }
+showata = "0.2.0"
+ndarray = "0.13.0"
+getrandom = { version = "0.1.14", features = ["wasm-bindgen"]}
 
 [features]
 default = ["console_error_panic_hook", "wee_alloc"]

@@ -2,7 +2,7 @@ use dodrio_ext::prelude::*;
 use include_dir::{include_dir, Dir, DirEntry};
 type ArticleEnt = Entity<super::article::Model, super::article::Msg, ()>;
 
-const PROJECT_DIR: Dir = include_dir!("src/articles");
+pub const PROJECT_DIR: Dir = include_dir!("src/articles");
 pub enum Msg {
     AddContent(Sender<bool>),
 }
@@ -33,7 +33,7 @@ impl Component<(), Msg> for Model {
                 for entry in PROJECT_DIR.find(glob).unwrap() {
                     if let DirEntry::File(file) = entry {
                         let md = file.contents_utf8().unwrap();
-                        let article = super::article::Model(md.to_string(), None);
+                        let article = super::article::Model(md.to_string());
                         let ent = Entity::new(article, root_tx.clone());
                         self.articles.push(ent);
                     }
@@ -56,8 +56,8 @@ impl Render<(), Msg> for Model {
         let view = self
             .articles
             .iter()
-            .map(|content: &ArticleEnt| <_ as dodrio::Render>::render(content, ctx))
-            .collect::<Vec<Node<'a>>>();
+            .map(|content: &ArticleEnt| dodrio!(bump, <div style="padding-bottom: 1rem">{<_ as dodrio::Render>::render(content, ctx)}</div>))
+            .collect::<Vec<_>>();
         dodrio!(bump,
             <div class="box">
                 { view }

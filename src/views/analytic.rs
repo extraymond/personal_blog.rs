@@ -19,7 +19,7 @@ impl Component<Msg, ()> for Model {
 
     fn mounted(tx: Sender<Msg>, _: Sender<()>, root_tx: Sender<bool>) {
         let content = include_str!("../articles/01_intro.md");
-        let art_comp = article::Model(content.to_string(), None);
+        let art_comp = article::Model(content.to_string());
         let chart_comp = chart::Model::default();
         let mut tx_clone = tx.clone();
         spawn_local(async move {

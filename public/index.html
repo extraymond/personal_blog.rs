@@ -14,7 +14,7 @@
     <script type="text/javascript">
     window.addEventListener("vega", (e)=>{
       var spec = JSON.parse(e.detail);
-      vegaEmbed('#vega', spec).then(function(result) {
+      vegaEmbed('#vega', spec, {renderer: "svg"}).then((result) => {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
       }).catch(console.error);
     })
