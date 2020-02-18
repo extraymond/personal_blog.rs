@@ -208,12 +208,10 @@ function __wbg_adapter_20(arg0, arg1) {
     wasm._dyn_core__ops__function__FnMut_____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__h3a9d8dc04b3f58ea(arg0, arg1);
 }
 
-function __wbg_adapter_23(arg0, arg1, arg2, arg3, arg4) {
+function __wbg_adapter_23(arg0, arg1) {
     _assertNum(arg0);
     _assertNum(arg1);
-    _assertNum(arg3);
-    _assertNum(arg4);
-    wasm._dyn_core__ops__function__Fn__A__B__C___Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__h9a38811a60c6233f(arg0, arg1, addHeapObject(arg2), arg3, arg4);
+    wasm._dyn_core__ops__function__FnMut_____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__h0f8a6fa30b6db6ff(arg0, arg1);
 }
 
 function __wbg_adapter_26(arg0, arg1, arg2) {
@@ -222,10 +220,12 @@ function __wbg_adapter_26(arg0, arg1, arg2) {
     wasm._dyn_core__ops__function__FnMut__A____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__ha66839986d819f5e(arg0, arg1, addHeapObject(arg2));
 }
 
-function __wbg_adapter_29(arg0, arg1) {
+function __wbg_adapter_29(arg0, arg1, arg2, arg3, arg4) {
     _assertNum(arg0);
     _assertNum(arg1);
-    wasm._dyn_core__ops__function__FnMut_____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__h0f8a6fa30b6db6ff(arg0, arg1);
+    _assertNum(arg3);
+    _assertNum(arg4);
+    wasm._dyn_core__ops__function__Fn__A__B__C___Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__h9a38811a60c6233f(arg0, arg1, addHeapObject(arg2), arg3, arg4);
 }
 
 /**
@@ -736,19 +736,19 @@ function init(module) {
             logError(e)
         }
     };
-    imports.wbg.__wbindgen_closure_wrapper9803 = function(arg0, arg1, arg2) {
+    imports.wbg.__wbindgen_closure_wrapper12041 = function(arg0, arg1, arg2) {
         try {
 
             const state = { a: arg0, b: arg1, cnt: 1 };
-            const real = (arg0, arg1, arg2) => {
+            const real = (arg0) => {
                 state.cnt++;
+                const a = state.a;
+                state.a = 0;
                 try {
-                    return __wbg_adapter_23(state.a, state.b, arg0, arg1, arg2);
+                    return __wbg_adapter_26(a, state.b, arg0);
                 } finally {
-                    if (--state.cnt === 0) {
-                        wasm.__wbindgen_export_2.get(299)(state.a, state.b);
-                        state.a = 0;
-                    }
+                    if (--state.cnt === 0) wasm.__wbindgen_export_2.get(319)(a, state.b);
+                    else state.a = a;
                 }
             }
             ;
@@ -768,7 +768,7 @@ function init(module) {
                 const a = state.a;
                 state.a = 0;
                 try {
-                    return __wbg_adapter_29(a, state.b, );
+                    return __wbg_adapter_23(a, state.b, );
                 } finally {
                     if (--state.cnt === 0) wasm.__wbindgen_export_2.get(297)(a, state.b);
                     else state.a = a;
@@ -782,19 +782,19 @@ function init(module) {
             logError(e)
         }
     };
-    imports.wbg.__wbindgen_closure_wrapper12041 = function(arg0, arg1, arg2) {
+    imports.wbg.__wbindgen_closure_wrapper9803 = function(arg0, arg1, arg2) {
         try {
 
             const state = { a: arg0, b: arg1, cnt: 1 };
-            const real = (arg0) => {
+            const real = (arg0, arg1, arg2) => {
                 state.cnt++;
-                const a = state.a;
-                state.a = 0;
                 try {
-                    return __wbg_adapter_26(a, state.b, arg0);
+                    return __wbg_adapter_29(state.a, state.b, arg0, arg1, arg2);
                 } finally {
-                    if (--state.cnt === 0) wasm.__wbindgen_export_2.get(319)(a, state.b);
-                    else state.a = a;
+                    if (--state.cnt === 0) {
+                        wasm.__wbindgen_export_2.get(299)(state.a, state.b);
+                        state.a = 0;
+                    }
                 }
             }
             ;

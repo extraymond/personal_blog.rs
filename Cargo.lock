@@ -530,6 +530,7 @@ dependencies = [
 [[package]]
 name = "dodrio-ext"
 version = "0.1.0"
+source = "git+https://github.com/extraymond/dodrio-ext#0659212fa08788892add68a0840492a7a7528b49"
 dependencies = [
  "anyhow",
  "async-trait",
