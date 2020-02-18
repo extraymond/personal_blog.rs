@@ -1,6 +1,7 @@
 use super::super::component::{article, blog_page::PROJECT_DIR};
 use dodrio_ext::prelude::*;
 use include_dir::*;
+use uuid::Uuid;
 
 #[derive(Default)]
 pub struct Model {
@@ -31,7 +32,14 @@ impl Component<Msg, ()> for Model {
                 for entry in PROJECT_DIR.find(glob).unwrap() {
                     if let DirEntry::File(file) = entry {
                         let md = file.contents_utf8().unwrap();
-                        let article = article::Model(md.to_string());
+                        let title = file
+                            .path()
+                            .file_name()
+                            .map(|name| name.to_os_string())
+                            .map(|name| name.into_string().ok())
+                            .flatten()
+                            .unwrap();
+                        let article = article::Model::new_with_id(title, md.to_string());
                         let ent = Entity::new(article, tx.clone());
                         self.tabs.push(ent);
                     }

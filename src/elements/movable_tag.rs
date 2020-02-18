@@ -31,7 +31,6 @@ impl<B> Component<Msg, B> for Model {
                     let el: web_sys::Element = target.unchecked_into();
                     let rect = el.get_bounding_client_rect();
                     self.width.replace(rect.width() as i32);
-                    log::info!("{:?}", self.width);
                 }
                 self.editable = true;
                 false
@@ -47,7 +46,10 @@ impl<B> Component<Msg, B> for Model {
                     let rect = el.get_bounding_client_rect();
                     let e: web_sys::MouseEvent = e.unchecked_into();
                     let mouse_pos = e.client_x() - rect.left() as i32;
-                    self.pos = mouse_pos - self.width.unwrap() / 2;
+                    let target = mouse_pos - self.width.unwrap();
+                    if target >= 0 {
+                        self.pos = target;
+                    }
                     true
                 } else {
                     false
@@ -125,10 +127,9 @@ impl<B> Render<Msg, B> for Model {
                 }}
 
                 class="tag is-dark is-unselectable"
-                style={ format!("position: relative; left: {};", self.pos) }>
+                style={ format!("position: relative; left: {}px;", self.pos) }>
                     {
-                        let nodes = vec![dodrio::builder::text(dodrio::bumpalo::format!(in bump, "{}", self.pos).into_bump_str())];
-                        nodes
+                        vec![dodrio::builder::text(dodrio::bumpalo::format!(in bump, "{}", self.pos).into_bump_str())]
                      }
                 </div>
             </div>)

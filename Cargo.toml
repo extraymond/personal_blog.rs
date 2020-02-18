@@ -12,7 +12,8 @@ license = "MIT"
 [dependencies]
 js-sys = "0.3.35"
 include_dir = "0.5.0"
-dodrio-ext = { git = "https://github.com/extraymond/dodrio-ext" }
+# dodrio-ext = { git = "https://github.com/extraymond/dodrio-ext" }
+dodrio-ext = { path = "/home/extraymond/git/dodrio-ext/" }
 gloo = "0.2.0"
 femme = "1.3.0"
 log = "0.4.8"
@@ -28,6 +29,7 @@ vega_lite_3 = { vesion = "0.2.4" }
 showata = "0.2.0"
 ndarray = "0.13.0"
 getrandom = { version = "0.1.14", features = ["wasm-bindgen"]}
+uuid = { version = "0.8.1", feastures = ["v4", "wasm-bindgen"]}
 
 [features]
 default = ["console_error_panic_hook", "wee_alloc"]

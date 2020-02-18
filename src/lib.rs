@@ -26,16 +26,7 @@ pub fn start() {
     }
 
     let mut hub = MessageHub::new();
-
-    hub.bind_root_el(
-        component::blog_page::Model::default(),
-        //  {
-        //     tabs: vec![],
-        //     idx: 0,
-        // },
-        None,
-    );
-
+    hub.gen_root_el::<component::blog_page::Model, (), component::blog_page::Msg>(None);
     hub.mount_hub_rx();
 }
 

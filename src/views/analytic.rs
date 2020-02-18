@@ -1,5 +1,6 @@
 use crate::component::{article, chart};
 use dodrio_ext::prelude::*;
+use uuid::Uuid;
 
 #[derive(Default)]
 pub struct Model {
@@ -19,7 +20,8 @@ impl Component<Msg, ()> for Model {
 
     fn mounted(tx: Sender<Msg>, _: Sender<()>, root_tx: Sender<bool>) {
         let content = include_str!("../articles/01_intro.md");
-        let art_comp = article::Model(content.to_string());
+        let uid = Uuid::new_v4().to_string();
+        let art_comp = article::Model(content.to_string(), "".to_string(), uid);
         let chart_comp = chart::Model::default();
         let mut tx_clone = tx.clone();
         spawn_local(async move {
