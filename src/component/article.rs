@@ -96,7 +96,9 @@ impl Render<Msg, ()> for Model {
                 </div>
                 <div class="card-content">
                     <section class="section">
-                    <div class="content" data-content=id.into_bump_str()></div>
+                    <div class="container">
+                        <div class="content" data-content=id.into_bump_str()></div>
+                    </div>
                     </section>
                 </div>
             </div>)
