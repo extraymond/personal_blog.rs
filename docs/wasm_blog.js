@@ -176,20 +176,20 @@ function getInt32Memory0() {
     }
     return cachegetInt32Memory0;
 }
-function __wbg_adapter_20(arg0, arg1) {
-    wasm.wasm_bindgen__convert__closures__invoke0_mut__h0eb19c8e3312e819(arg0, arg1);
-}
-
-function __wbg_adapter_23(arg0, arg1) {
-    wasm.wasm_bindgen__convert__closures__invoke0_mut__h0eb19c8e3312e819(arg0, arg1);
-}
-
-function __wbg_adapter_26(arg0, arg1, arg2, arg3, arg4) {
+function __wbg_adapter_20(arg0, arg1, arg2, arg3, arg4) {
     wasm.wasm_bindgen__convert__closures__invoke3_mut__h14566bca65e670dc(arg0, arg1, addHeapObject(arg2), arg3, arg4);
 }
 
-function __wbg_adapter_29(arg0, arg1, arg2) {
+function __wbg_adapter_23(arg0, arg1, arg2) {
     wasm.wasm_bindgen__convert__closures__invoke1_mut__h84fb5bb03bac6816(arg0, arg1, addHeapObject(arg2));
+}
+
+function __wbg_adapter_26(arg0, arg1) {
+    wasm.wasm_bindgen__convert__closures__invoke0_mut__h0eb19c8e3312e819(arg0, arg1);
+}
+
+function __wbg_adapter_29(arg0, arg1) {
+    wasm.wasm_bindgen__convert__closures__invoke0_mut__h0eb19c8e3312e819(arg0, arg1);
 }
 
 /**
@@ -488,7 +488,7 @@ function init(module) {
         const real = (arg0, arg1, arg2) => {
             state.cnt++;
             try {
-                return __wbg_adapter_26(state.a, state.b, arg0, arg1, arg2);
+                return __wbg_adapter_20(state.a, state.b, arg0, arg1, arg2);
             } finally {
                 if (--state.cnt === 0) {
                     wasm.__wbindgen_export_2.get(16)(state.a, state.b);
@@ -509,26 +509,7 @@ function init(module) {
             const a = state.a;
             state.a = 0;
             try {
-                return __wbg_adapter_23(a, state.b, );
-            } finally {
-                if (--state.cnt === 0) wasm.__wbindgen_export_2.get(16)(a, state.b);
-                else state.a = a;
-            }
-        }
-        ;
-        real.original = state;
-        var ret = real;
-        return addHeapObject(ret);
-    };
-    imports.wbg.__wbindgen_closure_wrapper247 = function(arg0, arg1, arg2) {
-
-        const state = { a: arg0, b: arg1, cnt: 1 };
-        const real = (arg0) => {
-            state.cnt++;
-            const a = state.a;
-            state.a = 0;
-            try {
-                return __wbg_adapter_29(a, state.b, arg0);
+                return __wbg_adapter_29(a, state.b, );
             } finally {
                 if (--state.cnt === 0) wasm.__wbindgen_export_2.get(16)(a, state.b);
                 else state.a = a;
@@ -547,7 +528,26 @@ function init(module) {
             const a = state.a;
             state.a = 0;
             try {
-                return __wbg_adapter_20(a, state.b, );
+                return __wbg_adapter_26(a, state.b, );
+            } finally {
+                if (--state.cnt === 0) wasm.__wbindgen_export_2.get(16)(a, state.b);
+                else state.a = a;
+            }
+        }
+        ;
+        real.original = state;
+        var ret = real;
+        return addHeapObject(ret);
+    };
+    imports.wbg.__wbindgen_closure_wrapper247 = function(arg0, arg1, arg2) {
+
+        const state = { a: arg0, b: arg1, cnt: 1 };
+        const real = (arg0) => {
+            state.cnt++;
+            const a = state.a;
+            state.a = 0;
+            try {
+                return __wbg_adapter_23(a, state.b, arg0);
             } finally {
                 if (--state.cnt === 0) wasm.__wbindgen_export_2.get(16)(a, state.b);
                 else state.a = a;

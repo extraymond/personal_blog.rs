@@ -12,8 +12,20 @@ args = ["build", "--release", "-t", "web", "-d", "docs", "--no-typescript"]
 command = "rm"
 args= ["docs/.gitignore", "docs/package.json"]
 
+[tasks.cleanbuild]
+command = "rm"
+args = ["-rf", "docs"]
+
+[tasks.migrate-index]
+command = "cp"
+args = ["static/index.html", "docs/"]
+
 [tasks.make-release]
-dependencies = ["build-release", "cleanup"]
+dependencies = ["cleanbuild", "build-release", "cleanup", "migrate-index", "gzip"]
+
+[tasks.gzip]
+command = "gzip"
+args = ["-rk9f", "docs/"]
 
 
 [tasks.check]
